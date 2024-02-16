@@ -2,20 +2,14 @@
 //  ContentView.swift
 //  Animations
 //
-//  Created by 최지웅 on 2/15/24.
+//  Created by 최지웅 on 2/16/24.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 

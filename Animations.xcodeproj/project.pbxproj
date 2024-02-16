@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B8176DBB2B7EE99E0052C661 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8176DBA2B7EE99E0052C661 /* ContentView.swift */; };
 		B867220E2B7DF074004E670C /* AnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867220D2B7DF074004E670C /* AnimationsApp.swift */; };
-		B86722102B7DF074004E670C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867220F2B7DF074004E670C /* ContentView.swift */; };
 		B86722122B7DF075004E670C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86722112B7DF075004E670C /* Assets.xcassets */; };
-		B86722152B7DF075004E670C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86722142B7DF075004E670C /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B8176DB82B7EE7750052C661 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		B8176DBA2B7EE99E0052C661 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B867220A2B7DF074004E670C /* Animations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B867220D2B7DF074004E670C /* AnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsApp.swift; sourceTree = "<group>"; };
-		B867220F2B7DF074004E670C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B86722112B7DF075004E670C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B86722142B7DF075004E670C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,9 +31,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B8176DB92B7EE9680052C661 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B8176DBC2B7EE9B10052C661 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		B86722012B7DF074004E670C = {
 			isa = PBXGroup;
 			children = (
+				B8176DB82B7EE7750052C661 /* MyPlayground.playground */,
 				B867220C2B7DF074004E670C /* Animations */,
 				B867220B2B7DF074004E670C /* Products */,
 			);
@@ -51,20 +65,13 @@
 		B867220C2B7DF074004E670C /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				B8176DBC2B7EE9B10052C661 /* Views */,
+				B8176DB92B7EE9680052C661 /* Model */,
 				B867220D2B7DF074004E670C /* AnimationsApp.swift */,
-				B867220F2B7DF074004E670C /* ContentView.swift */,
+				B8176DBA2B7EE99E0052C661 /* ContentView.swift */,
 				B86722112B7DF075004E670C /* Assets.xcassets */,
-				B86722132B7DF075004E670C /* Preview Content */,
 			);
 			path = Animations;
-			sourceTree = "<group>";
-		};
-		B86722132B7DF075004E670C /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				B86722142B7DF075004E670C /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +132,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86722152B7DF075004E670C /* Preview Assets.xcassets in Resources */,
 				B86722122B7DF075004E670C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +143,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86722102B7DF074004E670C /* ContentView.swift in Sources */,
 				B867220E2B7DF074004E670C /* AnimationsApp.swift in Sources */,
+				B8176DBB2B7EE99E0052C661 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
