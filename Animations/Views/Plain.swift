@@ -69,9 +69,9 @@ struct PlainGrid: View {
     var body: some View {
         GeometryReader{ geometry in
             LazyVGrid(columns: columns(geometry.size.width/3 - 1), spacing: 2){
-                ForEach(photos){ photo in
+                ForEach($photos){ $photo in
                     NavigationLink{
-                        PhotoView(photo: photo, size: .medium)
+                        PhotoDetail(photo: $photo)
                     } label:{
                         PhotoView(photo: photo, size: .portrait)
                             .mask{
