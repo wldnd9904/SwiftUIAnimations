@@ -30,7 +30,7 @@ public struct PhotoAPI:Codable {
     let liked: Bool
     let alt: String
     func toPhoto()->Photo {
-        return Photo(id: id, width: width, height: height, photographer: photographer, avgColor: Color(avg_color), imageSet: src, liked: liked, desc: alt)
+        return Photo(id: id, width: width, height: height, photographer: photographer, avgColor: Color(hex:avg_color), imageSet: src, liked: liked, desc: alt)
     }
 }
 

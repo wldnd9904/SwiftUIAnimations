@@ -18,7 +18,7 @@ struct PhotoDetail: View {
             } placeholder: {
                ( photo.avgColor == .white ?
                 .gray:
-                photo.avgColor)
+                    photo.avgColor)
                     .frame(idealWidth: photo.width, idealHeight:photo.height)
                     .scaledToFit()
             }
@@ -42,7 +42,6 @@ struct PhotoDetail: View {
                 Spacer()
                 Text("by "+photo.photographer)
             }
-            Text(photo.avgColor.description)
             .padding(.horizontal)
             Spacer()
         }

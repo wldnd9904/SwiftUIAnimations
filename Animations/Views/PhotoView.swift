@@ -14,21 +14,15 @@ struct PhotoView: View {
     var body: some View {
         AsyncImage(url: size.url(photo), scale: 1.0, content: {image in
             image
+                .resizable()
         }, placeholder: {
-            photo.avgColor
-                .frame(width:size.width(photo), height:size.height(photo))
-                .opacity(blinking ? 0.8:1)
-                .onAppear{
-                    withAnimation {
-                        blinking = false
-                    }
-                }
-                .animation(
-                    .easeInOut(duration: 1).repeatForever(autoreverses: true),value: blinking)
+            Rectangle()
+                .fill(photo.avgColor)
         })
     }
 }
 
 #Preview {
     PhotoView(photo: .demo, size:.medium)
+        .frame(width:300,height:300)
 }
