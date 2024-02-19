@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var modelData:ModelData
     var body: some View {
-        Plain()
+        NavigationStack{
+            List{
+                NavigationLink{
+                    Plain()
+                        .navigationTitle("Plain")
+                } label:{
+                    Text("Plain")
+                }
+                .navigationTitle("Animations")
+            }.listStyle(.inset)
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(ModelData())
 }
