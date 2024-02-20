@@ -9,8 +9,16 @@ import SwiftUI
 
 struct PhotoDetail: View {
     @Binding var photo:Photo
+    let onClose: ()->Void
     var body: some View {
         VStack{
+            HStack{
+                Button(action:onClose){
+                    Image(systemName: "chevron.left")
+                }.padding()
+                .foregroundStyle(.primary)
+                Spacer()
+            }
             AsyncImage(url: ImageSize.original.url(photo))  {image in
                 image
                     .resizable()
@@ -45,8 +53,12 @@ struct PhotoDetail: View {
             .padding(.horizontal)
             Spacer()
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 #Preview {
-    PhotoDetail(photo:.constant(.demo))
+    ZStack{
+        Color.black
+        PhotoDetail(photo:.constant(.demo), onClose: {})
+    }
 }
