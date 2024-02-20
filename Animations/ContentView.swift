@@ -7,19 +7,37 @@
 
 import SwiftUI
 
+private enum AnimationType:Hashable {
+    case plain
+    case sharedElement
+}
+
 struct ContentView: View {
     @EnvironmentObject var modelData:ModelData
     var body: some View {
-        NavigationStack{
+        NavigationStack(path:$modelData.path){
             List{
-                NavigationLink{
-                    Plain()
-                        .navigationTitle("Plain")
-                } label:{
+                NavigationLink(value:AnimationType.plain){
                     Text("Plain")
                 }
-                .navigationTitle("Animations")
-            }.listStyle(.inset)
+                NavigationLink(value:AnimationType.sharedElement){
+                    Text("SharedElement")
+                }
+            }
+            .listStyle(.inset)
+            .navigationTitle("Animations")
+            .navigationDestination(for: AnimationType.self){ dest in
+                switch(dest){
+                case .plain:
+                    Plain()
+                        .navigationTitle("Plain")
+                        .navigationBarTitleDisplayMode(.inline)
+                case .sharedElement:
+                    SharedElement()
+                        .navigationTitle("SharedElement")
+                        .navigationBarTitleDisplayMode(.inline)
+                }
+            }
         }
     }
 }

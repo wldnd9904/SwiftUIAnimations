@@ -10,30 +10,38 @@ import SwiftUI
 struct Plain: View {
     @EnvironmentObject var modelData:ModelData
     var body: some View {
-        NavigationStack{
-            ScrollView{
-                VStack{
-                    SearchBar{ query in
-                        DataFetcher.searchPhotos(query: query, perPage: 20) { result in
-                            switch result {
-                            case .success(let pexelAPI):
+        ScrollView{
+            VStack{
+                PlainSearchBar{ query in
+                    DataFetcher.searchPhotos(query: query, perPage: 20) { result in
+                        switch result {
+                        case .success(let pexelAPI):
+                            DispatchQueue.main.async{
                                 modelData.photos = pexelAPI.photos.map{$0.toPhoto()}
-                            case .failure(let error):
-                                print("Error: \(error.localizedDescription)")
                             }
+                        case .failure(let error):
+                            print("Error: \(error.localizedDescription)")
                         }
                     }
-                    .padding()
-                    PlainGrid(photos: $modelData.photos)
+                }
+                .padding()
+                PlainGrid(photos: $modelData.photos){ idx in
+                    modelData.path.append(idx)
+                }
+                .navigationDestination(for: Int.self){idx in
+                    PhotoDetail(photo:$modelData.photos[idx]){
+                        modelData.path.removeLast()
+                    }
+                    .navigationBarBackButtonHidden()
                 }
             }
-            .padding(.horizontal, 2)
-            .scrollIndicators(.hidden)
         }
+        .padding(.horizontal, 2)
+        .scrollIndicators(.hidden)
     }
 }
 
-struct SearchBar: View {
+struct PlainSearchBar: View {
     @State var query:String = "Nature"
     let onSubmit:(String)->Void
     var body: some View {
@@ -61,38 +69,26 @@ struct SearchBar: View {
 
 struct PlainGrid: View {
     @Binding var photos: [Photo]
-    func columns(_ columnSize: CGFloat)->[GridItem]{
-        [
-            GridItem(.fixed(columnSize), spacing: 2, alignment: nil),
-            GridItem(.fixed(columnSize), spacing: 2, alignment: nil),
-            GridItem(.fixed(columnSize), spacing: 2, alignment: nil),
-        ]
-    }
+    let onSelect: (Int)->Void
     var body: some View {
         LazyVGrid(columns:.init(repeating: .init(.flexible(),spacing: 2), count: 3),alignment: .center,spacing:2){
-            ForEach($photos){ $photo in
-                NavigationLink{
-                    PhotoDetail(photo: $photo)
-                } label:{
-                    PhotoView(photo: photo, size: .portrait)
-                        .aspectRatio(1, contentMode: .fill)
+            ForEach(0..<$photos.count, id:\.self){ idx in
+                Button(action:{onSelect(idx)}){
+                    Color.clear
+                        .scaledToFill()
+                        .overlay(
+                            PhotoView(photo: photos[idx], size: .portrait).aspectRatio( contentMode: .fill)
+                        )
+                        .clipShape(Rectangle())
                 }
             }
         }
     }
-    //        LazyVGrid(columns: columns(130 - 1), spacing: 2){
-    //            ForEach($photos){ $photo in
-    //                NavigationLink{
-    //                    PhotoDetail(photo: $photo)
-    //                } label:{
-    //                    PhotoView(photo: photo, size: .portrait)
-    //                        .frame(width:130 - 1,height:130 - 1)
-    //                }
-    //            }
-    //        }
 }
 
-#Preview {
-    Plain()
-        .environmentObject(ModelData())
+struct Plain_Preview:PreviewProvider{
+    static var previews:some View {
+            Plain()
+            .environmentObject(ModelData())
+    }
 }

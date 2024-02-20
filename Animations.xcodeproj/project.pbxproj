@@ -17,6 +17,7 @@
 		B857DD942B8337AA00A5BEFA /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B857DD932B8337AA00A5BEFA /* ModelData.swift */; };
 		B867220E2B7DF074004E670C /* AnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867220D2B7DF074004E670C /* AnimationsApp.swift */; };
 		B86722122B7DF075004E670C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86722112B7DF075004E670C /* Assets.xcassets */; };
+		B8ED37842B84233F006F27CA /* SharedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED37832B84233F006F27CA /* SharedElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B867220A2B7DF074004E670C /* Animations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B867220D2B7DF074004E670C /* AnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsApp.swift; sourceTree = "<group>"; };
 		B86722112B7DF075004E670C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B8ED37832B84233F006F27CA /* SharedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				B8176DC42B7F10280052C661 /* Plain.swift */,
+				B8ED37832B84233F006F27CA /* SharedElement.swift */,
 				B8176DC82B7F243D0052C661 /* PhotoView.swift */,
 				B8176DCA2B7F50330052C661 /* PhotoDetail.swift */,
 			);
@@ -175,6 +178,7 @@
 				B8176DC02B7EF2EC0052C661 /* PhotoResource.swift in Sources */,
 				B8176DCB2B7F50330052C661 /* PhotoDetail.swift in Sources */,
 				B857DD942B8337AA00A5BEFA /* ModelData.swift in Sources */,
+				B8ED37842B84233F006F27CA /* SharedElement.swift in Sources */,
 				B8176DC32B7EF7160052C661 /* Color+.swift in Sources */,
 				B8176DC92B7F243D0052C661 /* PhotoView.swift in Sources */,
 				B8176DC52B7F10280052C661 /* Plain.swift in Sources */,
