@@ -114,6 +114,7 @@ struct Photo: Identifiable {
     let imageSet: ImageSet
     var liked: Bool
     let desc:String
+    var image: Image? = nil
     static let demo = Photo(
         id: 2014422,
         width: 3024,

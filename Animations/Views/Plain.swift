@@ -77,7 +77,7 @@ struct PlainGrid: View {
                     Color.clear
                         .scaledToFill()
                         .overlay(
-                            PhotoView(photo: photos[idx], size: .portrait).aspectRatio( contentMode: .fill)
+                            PhotoView(photo: $photos[idx], size: .portrait).aspectRatio( contentMode: .fill)
                         )
                         .clipShape(Rectangle())
                 }

@@ -10,24 +10,38 @@ import SwiftUI
 struct PhotoView: View {
     @State var blinking = false
     @State private var currentUrl: URL?
-    let photo: Photo
+    @State var loaded = false
+    @Binding var photo: Photo
     let size: ImageSize
     var body: some View {
         AsyncImage(url: currentUrl, scale: 1.0, content: {image in
-            image.resizable()
-        }, placeholder: {
+            Rectangle()
+                .fill(photo.avgColor)
+                .overlay{
+                    image.resizable()
+                        .opacity(loaded ? 1:0)
+                        .onAppear{
+                            withAnimation{
+                                loaded = true
+                            }
+                            photo.image = image
+                        }
+                }
+        }) {
             Rectangle()
                 .fill(photo.avgColor)
                 .opacity(blinking ? 1:0.5)
                 .animation(.easeIn(duration: 0.8).repeatForever(autoreverses: true),value:blinking)
-                
-        })
-        .onAppear{
-            blinking = true
-            currentUrl = size.url(photo)}
+                .onAppear{
+                    withAnimation{
+                        blinking = true
+                    }
+                    currentUrl = size.url(photo)
+                }
+        }
     }
 }
 
 #Preview {
-    PhotoView(photo: .demo, size:.medium)
+    PhotoView(photo: .constant(.demo), size:.medium)
 }
