@@ -18,13 +18,14 @@ struct PhotoView: View {
             Rectangle()
                 .fill(photo.avgColor)
                 .overlay{
-                    image.resizable()
+                    image
+                        .resizable()
                         .opacity(loaded ? 1:0)
                         .onAppear{
                             withAnimation{
                                 loaded = true
+                                photo.image = image
                             }
-                            photo.image = image
                         }
                 }
         }) {
