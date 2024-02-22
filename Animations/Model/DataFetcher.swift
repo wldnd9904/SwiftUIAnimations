@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 public struct PexelAPI:Codable {
     let total_results: Int
     let page: Int
@@ -18,6 +19,7 @@ public struct PexelAPI:Codable {
 }
 
 public struct PhotoAPI:Codable {
+    public static var idx = -1
     let id: Int
     let width: CGFloat
     let height: CGFloat
@@ -30,7 +32,8 @@ public struct PhotoAPI:Codable {
     let liked: Bool
     let alt: String
     func toPhoto()->Photo {
-        return Photo(id: id, width: width, height: height, photographer: photographer, avgColor: Color(hex:avg_color), imageSet: src, liked: liked, desc: alt)
+        PhotoAPI.idx += 1
+        return Photo(id: id,idx: PhotoAPI.idx, width: width, height: height, photographer: photographer, avgColor: Color(hex:avg_color), imageSet: src, liked: liked, desc: alt)
     }
 }
 
@@ -48,8 +51,11 @@ struct DataFetcher {
                       locale: String? = nil,
                       page: Int? = nil,
                       perPage: Int? = nil,
+                      clearIdx:Bool = true,
                       completion: @escaping (Result<PexelAPI, Error>) -> Void) {
-        
+        if(clearIdx) {
+            PhotoAPI.idx = -1
+        }
         var components = URLComponents(string: "https://api.pexels.com/v1/search")
         components?.queryItems = [
             URLQueryItem(name: "query", value: query),

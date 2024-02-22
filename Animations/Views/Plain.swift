@@ -42,10 +42,12 @@ struct Plain: View {
 }
 
 struct PlainSearchBar: View {
-    @State var query:String = "Nature"
+    @State var query:String = "Cat"
     let onSubmit:(String)->Void
     var body: some View {
         TextField("query", text: $query)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
             .padding()
             .background(.thinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 25))
@@ -72,12 +74,12 @@ struct PlainGrid: View {
     let onSelect: (Int)->Void
     var body: some View {
         LazyVGrid(columns:.init(repeating: .init(.flexible(),spacing: 2), count: 3),alignment: .center,spacing:2){
-            ForEach(0..<$photos.count, id:\.self){ idx in
-                Button(action:{onSelect(idx)}){
+            ForEach(photos, id:\.id){ photo in
+                Button(action:{onSelect(photo.idx)}){
                     Color.clear
                         .scaledToFill()
                         .overlay(
-                            PhotoView(photo: $photos[idx], size: .portrait).aspectRatio( contentMode: .fill)
+                            PhotoView(photo: $photos[photo.idx], size: .portrait).aspectRatio( contentMode: .fill)
                         )
                         .clipShape(Rectangle())
                 }

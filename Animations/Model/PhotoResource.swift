@@ -107,6 +107,7 @@ public struct ImageSet:Codable{
 
 struct Photo: Identifiable {
     let id: Int
+    let idx: Int
     let width:CGFloat
     let height: CGFloat
     let photographer: String
@@ -117,6 +118,7 @@ struct Photo: Identifiable {
     var image: Image? = nil
     static let demo = Photo(
         id: 2014422,
+        idx:0,
         width: 3024,
         height: 3024,
         photographer: "Joey Farina",
