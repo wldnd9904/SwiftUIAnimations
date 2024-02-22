@@ -20,6 +20,7 @@ struct PhotoView: View {
                 .overlay{
                     image
                         .resizable()
+                        .scaledToFill()
                         .opacity(loaded ? 1:0)
                         .onAppear{
                             withAnimation{
@@ -34,10 +35,12 @@ struct PhotoView: View {
                 .opacity(blinking ? 1:0.5)
                 .animation(.easeIn(duration: 0.8).repeatForever(autoreverses: true),value:blinking)
                 .onAppear{
-                    withAnimation{
-                        blinking = true
+                    DispatchQueue.main.async{
+                        withAnimation{
+                            blinking = true
+                        }
+                        currentUrl = size.url(photo)
                     }
-                    currentUrl = size.url(photo)
                 }
         }
     }

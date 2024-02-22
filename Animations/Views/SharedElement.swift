@@ -46,8 +46,11 @@ struct SharedElement: View {
             
             if((selectedIdx) != nil){
                 SharedElementPhotoDetail(photo: $modelData.photos[selectedIdx!], lenderImage: $lenderImage, namespace:sharedElement){
-                    selectedIdx = nil
-                    lenderImage = false
+                    withAnimation{
+                        lenderImage = false
+                        selectedIdx = nil
+                        
+                    }
                 }
                 .navigationBarBackButtonHidden()
                 .background(ignoresSafeAreaEdges:.all)
@@ -61,20 +64,11 @@ struct SharedElementPhotoDetail: View {
     @Binding var photo:Photo
     @Binding var lenderImage:Bool
     @State var backgroundHidden = false
+    @State var imageLoaded = false
     let namespace: Namespace.ID
     let onClose: ()->Void
     var body: some View {
-        //asyncimage 내부에서 onappear로 바인딩한 imagefullyloaded 참으로 바꾸면 썸네일이미지 사라짐
         ZStack{
-//            //백그라운드
-//            Color.black
-//                .ignoresSafeArea()
-//                .opacity(backgroundHidden ? 0.5:0)
-//                .onAppear{
-//                    withAnimation{
-//                        backgroundHidden = true
-//                    }
-//                }
             //디테일 뷰
             VStack{
                 HStack{
@@ -85,9 +79,22 @@ struct SharedElementPhotoDetail: View {
                     Spacer()
                 }
                 AsyncImage(url: lenderImage ? ImageSize.original.url(photo) : nil)  {image in
-                    image
-                        .resizable()
-                        .scaledToFit()
+                    (photo.image?.resizable())
+                    .frame(idealWidth: photo.width, idealHeight:photo.height)
+                    .scaledToFit()
+                    .overlay{
+                        image
+                            .resizable()
+                            .opacity(imageLoaded ? 1 : 0)
+                            .scaledToFit()
+                            .matchedGeometryEffect(id: photo.id, in: namespace)
+                            .onAppear{
+                                withAnimation{
+                                    imageLoaded = true
+                                }
+                            }
+                            .animation(.easeIn(duration:1), value:imageLoaded)
+                    }
                 } placeholder: {
                     (photo.image?.resizable())
                     .frame(idealWidth: photo.width, idealHeight:photo.height)
@@ -132,14 +139,14 @@ struct SharedElementGrid: View {
     let onSelect: (Int)->Void
     var body: some View {
         LazyVGrid(columns:.init(repeating: .init(.flexible(),spacing: 2), count: 3),alignment: .center,spacing:2){
-            ForEach(0..<$photos.count, id:\.self){ idx in
-                Button(action:{onSelect(idx)}){
+            ForEach(photos, id:\.id){ photo in
+                Button(action:{onSelect(photo.idx)}){
                     Color.clear
                         .scaledToFill()
                         .overlay(
-                            PhotoView(photo:$photos[idx], size: .small)
+                            PhotoView(photo:$photos[photo.idx], size: .small)
                                 .aspectRatio( contentMode: .fill)
-                                .matchedGeometryEffect(id: photos[idx].id, in: namespace)
+                                .matchedGeometryEffect(id: photos[photo.idx].id, in: namespace)
                         )
                         .mask{
                             Rectangle()
