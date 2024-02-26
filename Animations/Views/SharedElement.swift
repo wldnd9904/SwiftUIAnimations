@@ -13,19 +13,30 @@ struct SharedElement: View {
     @EnvironmentObject var modelData:ModelData
     @State var selectedIdx:Int?
     @State var lenderImage:Bool = false
+    @State var searching:Bool = false
     @Namespace private var sharedElement
+    func searchPhotos(query:String) async {
+            let result = await DataFetcher.searchPhotos(query: query, perPage: 20)
+            switch result {
+            case .success(let pexelAPI):
+                DispatchQueue.main.async{
+                    modelData.photos = pexelAPI.photos.map{$0.toPhoto()}
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+    }
+    
     var body: some View {
         ZStack{
             ScrollView{
                 VStack{
-                    PlainSearchBar{ query in
-                        DataFetcher.searchPhotos(query: query, perPage: 20) { result in
-                            switch result {
-                            case .success(let pexelAPI):             DispatchQueue.main.async{
-                                modelData.photos = pexelAPI.photos.map{$0.toPhoto()}
-                            }
-                            case .failure(let error):
-                                print("Error: \(error.localizedDescription)")
+                    PlainSearchBar(searching:$searching){ query in
+                        searching = true
+                        Task{
+                            await searchPhotos(query:query)
+                            DispatchQueue.main.async{
+                                searching=false
                             }
                         }
                     }

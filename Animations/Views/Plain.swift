@@ -9,18 +9,28 @@ import SwiftUI
 
 struct Plain: View {
     @EnvironmentObject var modelData:ModelData
+    @State var searching:Bool = false
+    func searchPhotos(query:String) async {
+            let result = await DataFetcher.searchPhotos(query: query, perPage: 20)
+            switch result {
+            case .success(let pexelAPI):
+                DispatchQueue.main.async{
+                    modelData.photos = pexelAPI.photos.map{$0.toPhoto()}
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+    }
+    
     var body: some View {
         ScrollView{
             VStack{
-                PlainSearchBar{ query in
-                    DataFetcher.searchPhotos(query: query, perPage: 20) { result in
-                        switch result {
-                        case .success(let pexelAPI):
-                            DispatchQueue.main.async{
-                                modelData.photos = pexelAPI.photos.map{$0.toPhoto()}
-                            }
-                        case .failure(let error):
-                            print("Error: \(error.localizedDescription)")
+                PlainSearchBar(searching:$searching){ query in
+                    searching = true
+                    Task{
+                        await searchPhotos(query:query)
+                        DispatchQueue.main.async{
+                            searching=false
                         }
                     }
                 }
@@ -43,6 +53,7 @@ struct Plain: View {
 
 struct PlainSearchBar: View {
     @State var query:String = "Cat"
+    @Binding var searching:Bool
     let onSubmit:(String)->Void
     var body: some View {
         TextField("query", text: $query)
@@ -60,12 +71,16 @@ struct PlainSearchBar: View {
                     .foregroundStyle(!query.isEmpty ? .black : .gray)
                     .scaleEffect(!query.isEmpty ? 1.2 : 1.0)
                     .animation(.easeInOut,value:query)
+                    .disabled(searching)
                 }
                 .padding(.trailing)
             }
             .onSubmit {
                 onSubmit(query)
             }
+            .opacity(searching ? 0.5:1)
+            .disabled(searching)
+            .animation(.easeInOut,value:searching)
     }
 }
 

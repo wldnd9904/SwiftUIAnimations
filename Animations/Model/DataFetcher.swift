@@ -37,22 +37,22 @@ public struct PhotoAPI:Codable {
     }
 }
 
-struct DataFetcher {
+public struct DataFetcher {
     enum PexelError: Error {
         case invalidURL
         case noData
         case decodingError
+        case unexpectedError
     }
     
     static func searchPhotos(query: String,
-                      orientation: String? = nil,
-                      size: String? = nil,
-                      color: String? = nil,
-                      locale: String? = nil,
-                      page: Int? = nil,
-                      perPage: Int? = nil,
-                      clearIdx:Bool = true,
-                      completion: @escaping (Result<PexelAPI, Error>) -> Void) {
+                             orientation: String? = nil,
+                             size: String? = nil,
+                             color: String? = nil,
+                             locale: String? = nil,
+                             page: Int? = nil,
+                             perPage: Int? = nil,
+                             clearIdx:Bool = true) async -> Result<PexelAPI, Error> {
         if(clearIdx) {
             PhotoAPI.idx = -1
         }
@@ -67,26 +67,22 @@ struct DataFetcher {
             URLQueryItem(name: "per_page", value: perPage.map { String($0) })
         ]
         guard let url = components?.url else {
-            completion(.failure(PexelError.invalidURL))
-            return
+            return .failure(PexelError.invalidURL)
         }
-        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("7JjUiVYAbS6H8tQtKKAGj0MHpmxGJ3ST1YrpfjfGGEyGJtMbqmhTyHek", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(.failure(error ?? PexelError.noData))
-                return
-            }
-            do {
-                let decoder = JSONDecoder()
-                let pexelAPI = try decoder.decode(PexelAPI.self, from: data)
-                completion(.success(pexelAPI))
-            } catch {
-                completion(.failure(PexelError.decodingError))
-            }
-        }.resume()
+        do {
+            let (data,_) = try await URLSession.shared.data(for: request)
+            let decoder = JSONDecoder()
+            let pexelAPI = try decoder.decode(PexelAPI.self, from: data)
+            return .success(pexelAPI)
+        } catch is DecodingError{
+            return .failure(PexelError.decodingError)
+        } catch is URLError{
+            return .failure(PexelError.noData)
+        } catch {
+            return .failure(PexelError.unexpectedError)
+        }
     }
 }
