@@ -10,6 +10,7 @@ import SwiftUI
 private enum AnimationType:Hashable {
     case plain
     case sharedElement
+    case infiniteScroll
 }
 
 struct ContentView: View {
@@ -23,6 +24,9 @@ struct ContentView: View {
                 NavigationLink(value:AnimationType.sharedElement){
                     Text("SharedElement")
                 }
+                NavigationLink(value:AnimationType.infiniteScroll){
+                    Text("InfiniteScroll")
+                }
             }
             .listStyle(.inset)
             .navigationTitle("Animations")
@@ -35,6 +39,10 @@ struct ContentView: View {
                 case .sharedElement:
                     SharedElement()
                         .navigationTitle("SharedElement")
+                        .navigationBarTitleDisplayMode(.inline)
+                case .infiniteScroll:
+                    InfiniteScroll()
+                        .navigationTitle("InfiniteScroll")
                         .navigationBarTitleDisplayMode(.inline)
                 }
             }

@@ -15,10 +15,10 @@
 		B8176DC92B7F243D0052C661 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8176DC82B7F243D0052C661 /* PhotoView.swift */; };
 		B8176DCB2B7F50330052C661 /* PhotoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8176DCA2B7F50330052C661 /* PhotoDetail.swift */; };
 		B817E82D2B85CA8700C2D6DA /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = B817E82C2B85CA8700C2D6DA /* Preferences.swift */; };
+		B83D3E172B8C7B1D00EADF24 /* InfiniteScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83D3E162B8C7B1D00EADF24 /* InfiniteScroll.swift */; };
 		B857DD942B8337AA00A5BEFA /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B857DD932B8337AA00A5BEFA /* ModelData.swift */; };
 		B867220E2B7DF074004E670C /* AnimationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B867220D2B7DF074004E670C /* AnimationsApp.swift */; };
 		B86722122B7DF075004E670C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86722112B7DF075004E670C /* Assets.xcassets */; };
-		B8CE964C2B870DF30095FAF7 /* InfiniteScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CE964B2B870DF30095FAF7 /* InfiniteScroll.swift */; };
 		B8ED37842B84233F006F27CA /* SharedElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED37832B84233F006F27CA /* SharedElement.swift */; };
 		B8ED37862B84917D006F27CA /* TestAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8ED37852B84917D006F27CA /* TestAnimation.swift */; };
 /* End PBXBuildFile section */
@@ -33,11 +33,11 @@
 		B8176DC82B7F243D0052C661 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 		B8176DCA2B7F50330052C661 /* PhotoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetail.swift; sourceTree = "<group>"; };
 		B817E82C2B85CA8700C2D6DA /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		B83D3E162B8C7B1D00EADF24 /* InfiniteScroll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScroll.swift; sourceTree = "<group>"; };
 		B857DD932B8337AA00A5BEFA /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		B867220A2B7DF074004E670C /* Animations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Animations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B867220D2B7DF074004E670C /* AnimationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsApp.swift; sourceTree = "<group>"; };
 		B86722112B7DF075004E670C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B8CE964B2B870DF30095FAF7 /* InfiniteScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteScroll.swift; sourceTree = "<group>"; };
 		B8ED37832B84233F006F27CA /* SharedElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedElement.swift; sourceTree = "<group>"; };
 		B8ED37852B84917D006F27CA /* TestAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,13 +66,13 @@
 		B8176DBC2B7EE9B10052C661 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B83D3E162B8C7B1D00EADF24 /* InfiniteScroll.swift */,
 				B8176DC42B7F10280052C661 /* Plain.swift */,
 				B8ED37832B84233F006F27CA /* SharedElement.swift */,
 				B8ED37852B84917D006F27CA /* TestAnimation.swift */,
 				B8176DC82B7F243D0052C661 /* PhotoView.swift */,
 				B8176DCA2B7F50330052C661 /* PhotoDetail.swift */,
 				B817E82C2B85CA8700C2D6DA /* Preferences.swift */,
-				B8CE964B2B870DF30095FAF7 /* InfiniteScroll.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 				B857DD942B8337AA00A5BEFA /* ModelData.swift in Sources */,
 				B8ED37842B84233F006F27CA /* SharedElement.swift in Sources */,
 				B8ED37862B84917D006F27CA /* TestAnimation.swift in Sources */,
-				B8CE964C2B870DF30095FAF7 /* InfiniteScroll.swift in Sources */,
+				B83D3E172B8C7B1D00EADF24 /* InfiniteScroll.swift in Sources */,
 				B8176DC32B7EF7160052C661 /* Color+.swift in Sources */,
 				B8176DC92B7F243D0052C661 /* PhotoView.swift in Sources */,
 				B8176DC52B7F10280052C661 /* Plain.swift in Sources */,
