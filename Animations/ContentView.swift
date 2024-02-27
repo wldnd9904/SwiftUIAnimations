@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-private enum AnimationType:Hashable {
-    case plain
-    case sharedElement
-    case infiniteScroll
+private enum AnimationType:String,Hashable,CaseIterable {
+    case plain = "Plain"
+    case sharedElement = "SharedElement"
+    case infiniteScroll = "InfiniteScroll"
+    case paths = "Paths(AnimatedShape)"
 }
 
 struct ContentView: View {
@@ -18,14 +19,10 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path:$modelData.path){
             List{
-                NavigationLink(value:AnimationType.plain){
-                    Text("Plain")
-                }
-                NavigationLink(value:AnimationType.sharedElement){
-                    Text("SharedElement")
-                }
-                NavigationLink(value:AnimationType.infiniteScroll){
-                    Text("InfiniteScroll")
+                ForEach(AnimationType.AllCases(), id:\.hashValue){ type in
+                    NavigationLink(value:type){
+                        Text(type.rawValue)
+                    }
                 }
             }
             .listStyle(.inset)
@@ -34,15 +31,19 @@ struct ContentView: View {
                 switch(dest){
                 case .plain:
                     Plain()
-                        .navigationTitle("Plain")
+                        .navigationTitle(AnimationType.plain.rawValue)
                         .navigationBarTitleDisplayMode(.inline)
                 case .sharedElement:
                     SharedElement()
-                        .navigationTitle("SharedElement")
+                        .navigationTitle(AnimationType.sharedElement.rawValue)
                         .navigationBarTitleDisplayMode(.inline)
                 case .infiniteScroll:
                     InfiniteScroll()
-                        .navigationTitle("InfiniteScroll")
+                        .navigationTitle(AnimationType.infiniteScroll.rawValue)
+                        .navigationBarTitleDisplayMode(.inline)
+                case .paths:
+                    Paths()
+                        .navigationTitle(AnimationType.paths.rawValue)
                         .navigationBarTitleDisplayMode(.inline)
                 }
             }
