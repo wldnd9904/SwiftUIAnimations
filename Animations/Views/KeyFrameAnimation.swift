@@ -41,7 +41,8 @@ struct KeyFrameAnimation: View {
     var body: some View {
         VStack(alignment:.center){
             Image(Character)
-                .frame(alignment: .center)
+                .resizable()
+                .scaledToFit()
                 .onAppear(perform: animationTimer)
         }
     }
