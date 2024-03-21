@@ -7,11 +7,26 @@
 
 import SwiftUI
 
-private enum AnimationType:String,Hashable,CaseIterable {
+public enum AnimationType:String,Hashable,CaseIterable {
     case plain = "Plain"
     case sharedElement = "SharedElement"
     case infiniteScroll = "InfiniteScroll"
     case paths = "Paths(AnimatedShape)"
+    case keyFrameAnimation = "KeyFrameAnimation"
+    var view: some View {
+        switch(self){
+        case .plain:
+            return AnyView(Plain())
+        case .sharedElement:
+            return AnyView(SharedElement())
+        case .infiniteScroll:
+            return AnyView(InfiniteScroll())
+        case .paths:
+            return AnyView(Paths())
+        case .keyFrameAnimation:
+            return AnyView(KeyFrameAnimation())
+        }
+    }
 }
 
 struct ContentView: View {
@@ -19,7 +34,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack(path:$modelData.path){
             List{
-                ForEach(AnimationType.AllCases(), id:\.hashValue){ type in
+                ForEach(AnimationType.allCases, id:\.hashValue){ type in
                     NavigationLink(value:type){
                         Text(type.rawValue)
                     }
@@ -28,30 +43,15 @@ struct ContentView: View {
             .listStyle(.inset)
             .navigationTitle("Animations")
             .navigationDestination(for: AnimationType.self){ dest in
-                switch(dest){
-                case .plain:
-                    Plain()
-                        .navigationTitle(AnimationType.plain.rawValue)
-                        .navigationBarTitleDisplayMode(.inline)
-                case .sharedElement:
-                    SharedElement()
-                        .navigationTitle(AnimationType.sharedElement.rawValue)
-                        .navigationBarTitleDisplayMode(.inline)
-                case .infiniteScroll:
-                    InfiniteScroll()
-                        .navigationTitle(AnimationType.infiniteScroll.rawValue)
-                        .navigationBarTitleDisplayMode(.inline)
-                case .paths:
-                    Paths()
-                        .navigationTitle(AnimationType.paths.rawValue)
-                        .navigationBarTitleDisplayMode(.inline)
-                }
+                dest.view
+                    .navigationTitle(AnimationType.plain.rawValue)
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .environmentObject(ModelData())
+        ContentView()
+            .environmentObject(ModelData())
 }
