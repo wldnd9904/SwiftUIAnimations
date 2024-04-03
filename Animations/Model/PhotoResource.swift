@@ -127,4 +127,26 @@ struct Photo: Identifiable {
         liked: false,
         desc: "Brown Rocks During Golden Hour"
     )
+    static let demo2 = Photo(
+        id: 2014423,
+        idx:1,
+        width: 3024,
+        height: 3024,
+        photographer: "Joey Farina",
+        avgColor: Color(hex:"#978E82"),
+        imageSet: .demo,
+        liked: false,
+        desc: "Brown Rocks During Golden Hour"
+    )
+    static let demo3 = Photo(
+        id: 2014424,
+        idx:2,
+        width: 3024,
+        height: 3024,
+        photographer: "Joey Farina",
+        avgColor: Color(hex:"#978E82"),
+        imageSet: .demo,
+        liked: false,
+        desc: "Brown Rocks During Golden Hour"
+    )
 }

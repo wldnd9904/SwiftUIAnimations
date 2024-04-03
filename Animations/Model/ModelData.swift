@@ -9,6 +9,6 @@ import Foundation
 import SwiftUI
 
 final class ModelData:ObservableObject{
-    @Published var photos:[Photo] = []
+    @Published var photos:[Photo] = [.demo,.demo2,.demo3]
     @Published var path:NavigationPath = NavigationPath()
 }
