@@ -34,6 +34,7 @@ struct CageCell: View {
                             .scaleEffect(x:(i&1 == 0) ? 1 : -1)
                             .frame(width:30,height:30)
                             .offset(x:geometry.size.width  * (CGFloat.random(in:0..<0.6)-0.3),y:geometry.size.width * (CGFloat.random(in:0..<0.6) - 0.3))
+                        
                     }
                 }
                     .offset(x:geometry.size.width * offset)

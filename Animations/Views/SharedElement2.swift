@@ -43,6 +43,10 @@ struct SharedElement2: View {
                         photo: $modelData.photos[selectedIdx!],
                         onClose:tapBackdrop)
                     .matchedGeometryEffect(id: selectedIdx!, in: sharedElement, properties: .position)
+                    .mask{
+                        Rectangle()
+                            .matchedGeometryEffect(id: selectedIdx!, in: sharedElement, properties: .frame)
+                    }
                 }
                 .zIndex(3)
                 .transition(.modal)
@@ -89,7 +93,6 @@ struct SharedElement2: View {
                         .foregroundStyle(.primary)
                         (photo.image?.resizable())
                             .scaledToFit()
-                            .opacity(0)
                         
                         Group{
                             HStack{
@@ -119,11 +122,7 @@ struct SharedElement2: View {
                     .background(Color(UIColor.systemBackground))
                     .scaleEffect(pct)
                 }
-                .overlay(alignment:.top){photo.image?.resizable().scaledToFit().offset(y: pct * 40)}
-//                .mask{
-//                    Rectangle()
-//                        .scaledToFill()
-//                }
+//                .overlay(alignment:.top){photo.image?.resizable().scaledToFit().offset(y: pct * 40)}
         }
     }
     
